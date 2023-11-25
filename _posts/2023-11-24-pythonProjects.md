@@ -3,9 +3,8 @@ title: "Python Scripting Projects"
 categories:
   - Blog
 tags:
-  - Post Formats
-  - readability
-  - standard
+  - Python
+  - Scripting
 ---
 
 As part of my own personal development I have been learning Python.
