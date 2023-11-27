@@ -7,6 +7,7 @@ tags:
   - CTF
   - Training
 toc: true
+toc_sticky: true
 ---
 
 This is a write-up for the [Agent T](https://tryhackme.com/room/agentt) room on [TryHackMe](https://tryhackme.com/). 
