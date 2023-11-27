@@ -6,18 +6,17 @@ tags:
   - TryHackMe
   - CTF
   - Training
+toc: true
 ---
 
 This is a write-up for the [Agent T](https://tryhackme.com/room/agentt) room on [TryHackMe](https://tryhackme.com/). 
 
 For additional learning and practice, I will map my process to the Cyber Kill Chain.
 
-Scenario:
-```
+# Scenario:
 Agent T uncovered this website, which looks innocent enough, but something seems off about how the server responds...
 
 After deploying the vulnerable machine attached to this task, please wait a couple of minutes for it to respond.
-```
 
 # Reconnaissance
 First, I ran nmap on the target IP to see what ports and services are in use:
@@ -33,6 +32,7 @@ Upon accessing the site, I instructed Intercept to catch the response:
 - Then Forward the request.
 
 When the response was captured, I inspected it for interesting information. I quickly noticed that the response included the version of PHP that the web server is using:
+
 `X-Powered-By: PHP/8.1.0-dev`
 
 # Weaponization
@@ -46,6 +46,7 @@ The script exploits a vulnerability that was introduced to the PHP source code a
 
 # Delivery
 The method of delivery for this exploit is through an HTTP request. Simply running the script and providing the target URL will begin this process:
+
 `$ python3 /usr/share/exploitdb/exploits/php/webapps/49933.py`
 
 # Exploitation
@@ -65,6 +66,7 @@ Again, this phase is outside the scope of this CTF.
 With access to the host, as `root` no less, I can now realize my objective of exfiltrating the flag. 
 
 Because I am targeting one specific file on the system, I will start by issueing a `find` command to attempt to locate it:
+
 `find / -name "*flag*"`
 
 This reveals the file `/flag.txt`
