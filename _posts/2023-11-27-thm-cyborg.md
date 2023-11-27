@@ -101,3 +101,4 @@ For the final flag, I navigated to the `/root` directory using, and used `cat` t
 
 # ATT&CK
 ![cyborg-nav-layer]({{ "/assets/images/cyborg-nav-layer.png" | relative_url }})
+```
