@@ -4,7 +4,7 @@ categories:
   - Blog
 tags:
   - TryHackMe
-  - Pentesting
+  - CTF
   - Training
 ---
 
@@ -12,7 +12,7 @@ This is a write-up for the [Valley](https://tryhackme.com/room/valleype) room on
 
 Let's jump right in!
 
-# Enumeration
+# Reconnaissance
 First, I performed an nmap scan of the target:
 `$ nmap -A <TARGET IP>`
 
@@ -29,6 +29,7 @@ I let that run while I did a walkthrough of the web application.
         - Each picture in the gallery page opens from `/static/#`, where `#` is the picture's number. There are 18 pictures on the gallery page, numbered 1-18
     - `/pricing/pricing.html`
 
+# Enumeration
 Next I ran feroxbuster on the target to see if there are any other directories to be found:
 `$ feroxbuster -u http://<TARGET IP> -w usr/share/wordlists/SecLists/Discovery/Web-Content/directory-list-lowercase-2.3-medium.txt`
 
