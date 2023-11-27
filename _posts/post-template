@@ -4,14 +4,14 @@ categories:
   - Blog
 tags:
   - TryHackMe
-  - Pentesting
+  - CTF
   - Training
  
- - Letsdefend
+  - Letsdefend
   - SOC
   - Training
  
- - Homelab
+  - Homelab
   - Proxmox
   - pfSense
   - Active Directory
