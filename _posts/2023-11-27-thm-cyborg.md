@@ -99,8 +99,27 @@ After this I ran:
 
 For the final flag, I navigated to the `/root` directory using, and used `cat` to view the flag in `root.txt`.
 
-# ATT&CK
+# MITRE ATT&CK
+I created the following layer in MITRE ATT&CK Navigator:
 <a href="/projectpage/assets/images/cyborg-nav-layer.png"><img src="/projectpage/assets/images/cyborg-nav-layer.png"></a>
-```
-![cyborg-nav-layer]({{ "/assets/images/cyborg-nav-layer.png" | relative_url }})
-```
+
+## Breakdown of Tactics and Techniques
+Reconnaissance and discovery was accomplished on the host using `nmap` and `feroxbuster`. Account discovery was performed by exploiting the public-facing application, and obtaining unsecured credentials via the `final_archive` file. From this, the attacker was able to comprimise the valid account of user "Alex." The attacker was then able to use the remote service `ssh` in order to acquire persistent access to the system. Finally, the attacker was able to escalate their privilege to the `root` user, by abusing the elevation control mechanism.
+
+# Mitigations
+As illustrated by the ATT&CK mapping, there wer many points at which security controls were either not implemented, or were misconfigured. 
+From the outside-in: 
+- Enumeration of the web application's directories via `feroxbuster`
+  - Implementing a WAF would be able to deny requests made by suspicious user-agents.
+- Lack of security controls in accessing `/admin`, which contains sensitive data.
+  - Configuring a login page would prevent unauthorized access to the `/admin` page. 
+- Weak encryption of credentials found in `final_archive`.
+  - Implementing a stronger hashing algorythm than MD5, and a more complex password policy.
+- Remote access over `ssh` with username and password.
+  - Disabling password login, and implement public key authentication.
+- Misconfigured elevation control mechanism.
+  - Auditing the `sudo` privileges of all users, removing this permission from files and users that do not require it, or requiring a password if they do.
+
+  # Conclusion
+
+  This was an enjoyable challenge. Reflecting on the attack, from a defender's perspective, it is interesting to consider how the attack may have played out if even one or two of the suggested mitigations had been implemented. While it may be nearly impossible to ensure the attacker would not have eventually found their way in, this illuminates why the concept of defense-in-depth is so important.
