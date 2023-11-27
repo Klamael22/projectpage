@@ -100,7 +100,7 @@ After this I ran:
 For the final flag, I navigated to the `/root` directory using, and used `cat` to view the flag in `root.txt`.
 
 # ATT&CK
-<a href="/assets/images/cyborg-nav-layer.png"><img src="/assets/images/cyborg-nav-layer.png"></a>
+<a href="/projectpage/assets/images/cyborg-nav-layer.png"><img src="/projectpage/assets/images/cyborg-nav-layer.png"></a>
 ```
 ![cyborg-nav-layer]({{ "/assets/images/cyborg-nav-layer.png" | relative_url }})
 ```
