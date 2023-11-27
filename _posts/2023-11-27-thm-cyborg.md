@@ -6,11 +6,14 @@ tags:
   - TryHackMe
   - CTF
   - Training
+  - MITRE ATT&CK
 toc: true
 toc_sticky: true
 ---
 
-This is a write-up for the [Cyborg](https://tryhackme.com/room/cyborgt8) room on [TryHackMe](https://tryhackme.com/). In addition to solving this CTF and providing my methodology, I will also use MITRE ATT&CK to map the attack.
+This is a write-up for the [Cyborg](https://tryhackme.com/room/cyborgt8) room on [TryHackMe](https://tryhackme.com/). 
+
+In addition to solving this CTF and providing my methodology, I will also use MITRE ATT&CK to map the attack.
 
 # Reconnaissance
 After deploying the machine, I began the process of information gathering with an `nmap` scan:
