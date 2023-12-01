@@ -102,5 +102,11 @@ Realistically, administering Active Directory should not be done from the domain
 - Check RSAT: Active Directory Domain Services and Lightweight Directory Services
 - Install
 
+## Installing PuTTY on WinAdmin
+As I have plans to expand this homelab, I imagine I will need an SSH client at some point. PuTTY is the SSH client for Windows that I am most familiar with.
+
+Download and install from here:
+https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html
+
 # Conclusion
 Now I have a basic Active Directory domain with two clients. 
