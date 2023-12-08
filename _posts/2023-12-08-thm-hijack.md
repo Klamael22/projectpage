@@ -70,12 +70,12 @@ After enumerating the open ports and services on the host I began assessing each
 ### FTP (21)
 I tested the FTP service for Anonymous login capabilities. This attack vector appears to be unavailable:
 ```bash
-$ ftp < TARGET IP >                                                                                                                        
+$ ftp < TARGET IP >
 Connected to < TARGET IP >.
 220 (vsFTPd 3.0.3)
 Name (< TARGET IP >:kali): Anonymous
 331 Please specify the password.
-Password: 
+Password:
 530 Login incorrect.
 ftp: Login failed
 ```
@@ -167,12 +167,12 @@ ftpuser:W3stV1rg1n14M0un741nM4m4
 #### FTP (21)
 With credentials for the valid account, ftpuser, I pivoted back to the FTP service:
 ```bash
-$ ftp 10.10.88.122                                                                                                                 
+$ ftp 10.10.88.122
 Connected to 10.10.88.122.
 220 (vsFTPd 3.0.3)
 Name (10.10.88.122:kali): ftpuser
 331 Please specify the password.
-Password: 
+Password:
 230 Login successful.
 
 ftp> ls -la
@@ -337,7 +337,7 @@ www-data@Hijack:/tmp$ ./linpeas.sh
 After the script finished, I found the following interesting results:
 ```bash
 ╔══════════╣ Searching passwords in config PHP files
-/var/www/html/config.php:$password = "N3v3rG0nn4G1v3Y0uUp";  
+/var/www/html/config.php:$password = "N3v3rG0nn4G1v3Y0uUp";
 ```
 
 I used `cat` to read the contents of this file:
