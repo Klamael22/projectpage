@@ -5,7 +5,6 @@ categories:
 tags:
   - TryHackMe
   - CTF
-  - Training
 ---
 
 This is a write-up for the [Valley](https://tryhackme.com/room/valleype) room on [TryHackMe](https://tryhackme.com/).

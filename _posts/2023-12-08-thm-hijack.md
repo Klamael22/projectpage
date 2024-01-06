@@ -5,7 +5,6 @@ categories:
 tags:
   - TryHackMe
   - CTF
-  - Training
   - MITRE ATT&CK
 toc: true
 toc_sticky: true

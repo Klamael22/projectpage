@@ -5,7 +5,6 @@ categories:
 tags:
   - Letsdefend
   - SOC
-  - Training
 toc: true
 toc_sticky: true
 ---
